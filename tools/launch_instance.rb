@@ -620,6 +620,7 @@ module BushSlicer
           res = Host.localhost.exec(task[:cmd], **exec_opts)
         end
         unless res[:success]
+          puts task[:cmd]
           raise "shell command failed execution, see logs"
         end
       when "ruby"

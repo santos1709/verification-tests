@@ -16,6 +16,8 @@ module BushSlicer
           return {:type => "gcp", :provider => self.init_gcp(env)}
         when "Azure"
           return {:type => "azure", :provider => self.init_azure(env)}
+        when "Ovirt"
+          return {:type => "ovirt", :provider => self.init_ovirt(env)}
         else
           raise "The IAAS provider #{provider_name} is currently not supported by test framework!"
         end
@@ -81,6 +83,10 @@ module BushSlicer
         :auth => auth,
         :resource_group => secret.value_of("azure_resourcegroup", user: :admin)
       )
+    end
+
+    def self.init_ovirt(env)
+      return BushSlicer::Ovirt.new()
     end
   end
 end
